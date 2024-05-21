@@ -4,6 +4,9 @@ import com.google.gson.*;
 
 import br.com.conversor.conectors.ConectorExchangeRate;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class CotacaoAtual extends ConectorExchangeRate {
     // ATRIBUTOS --------------------
     private final String moeda;
@@ -24,7 +27,8 @@ public class CotacaoAtual extends ConectorExchangeRate {
         JsonElement elementoJson = JsonParser.parseString(jsonString);
         // Transformar num obj
         JsonObject objJson = elementoJson.getAsJsonObject();
-
+        String paridade = objJson.get("base_code").getAsString() + "/"
+                + objJson.get("target_code").getAsString();
     }
 
 }
