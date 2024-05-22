@@ -32,19 +32,34 @@ public class Main {
                     =====================================================""");
             // Escolhas
             System.out.print("Escolha: ");
-            int escolha = leia.nextInt();
+            double escolha = leia.nextDouble();
             System.out.println("=====================================================");
             //Finaliza o programa
             if (escolha == 99) {
                 System.out.println("======  !!PROGRAMA FINALIZADO!!  =====");
                 break;
             }
-            switch (escolha) {
+            // Separando escolhas em variáveis
+            int moedaBase = (int) escolha;
+            int moedaCotacao = ((int)Math.round((escolha - moedaBase)*10) - 1);
+
+            switch (moedaBase) {
+                // BRL BASE
                 case 1:
                     System.out.printf("""
                     ==================CONVERSOR DE MOEDAS================
                     |                                                   |
+                    | CONVERSOR BRL/%s ---                              |
+                    | Para cada R$ 1 -> %s %2f                          |
+                    | ===== / =====                                     |
+                    | Mais FORTE contra: %s                             |
+                    | |--> Para cada R$ 1 -> %s %2f                     |
+                    | mais FRACO contra: %s                             |
+                    |--> Para cada R$ 1 -> %s %2f                       |
                     =====================================================""");
+
+                    // conversor
+                    System.out.printf("\nDigite o valor em %s: ");
                 case 2:
                 case 3:
                 case 4:
