@@ -17,7 +17,7 @@ public class CotacaoAtual extends ConectorExchangeRate {
     }
 
     // MÉTODOS ------------------------
-    public void comparaCom(String outraMoeda) {
+    public Double valorCotaContra(String outraMoeda) {
         ConectorExchangeRate conn = new ConectorExchangeRate(moeda, outraMoeda);
         System.out.println(conn);
 
@@ -27,8 +27,8 @@ public class CotacaoAtual extends ConectorExchangeRate {
         JsonElement elementoJson = JsonParser.parseString(jsonString);
         // Transformar num obj
         JsonObject objJson = elementoJson.getAsJsonObject();
-        String paridade = objJson.get("base_code").getAsString() + "/"
-                + objJson.get("target_code").getAsString();
+
+        return objJson.get("conversion_rate").getAsDouble();
     }
 
 }
