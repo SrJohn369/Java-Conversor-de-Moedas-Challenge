@@ -25,15 +25,6 @@ public class ConectorExchangeRate {
         this.uri = "https://v6.exchangerate-api.com/v6/" + key + "/pair/" + code1 + "/" + code2;
     }
 
-    // GETTERS & SETTERS --------------------
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
     // MÉTODOS ------------------------
     public HttpResponse<String> respostaAPI() {
         // Cria um cliente HTTP

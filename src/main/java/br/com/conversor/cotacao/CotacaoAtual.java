@@ -1,5 +1,6 @@
 package br.com.conversor.cotacao;
 
+import br.com.conversor.calculo.CalculoConversor;
 import com.google.gson.*;
 
 import br.com.conversor.conectors.ConectorExchangeRate;
@@ -8,7 +9,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CotacaoAtual extends ConectorExchangeRate {
+public class CotacaoAtual implements CalculoConversor {
     // ATRIBUTOS --------------------
     private final String moedaBase;
 
@@ -18,7 +19,7 @@ public class CotacaoAtual extends ConectorExchangeRate {
     }
 
     // MÉTODOS ------------------------
-    public Double valorCotaContra(String moedaCotacao) {
+    public double valorCotaContra(String moedaCotacao) {
         ConectorExchangeRate conn = new ConectorExchangeRate(moedaBase, moedaCotacao);
 
         // Capturar o json da request
@@ -68,4 +69,10 @@ public class CotacaoAtual extends ConectorExchangeRate {
         return Collections.min(ratesMap.entrySet(), Map.Entry.comparingByValue());
     }
 
+    @Override
+    public double converteValor(String moedaCotacao, double valorMoedaBase) {
+        double cotacao = valorCotaContra(moedaCotacao);
+
+        return cotacao * valorMoedaBase;
+    }
 }
