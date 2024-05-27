@@ -33,7 +33,7 @@ CLASSES E INTERFACE
 `Interface CalculoConversor`  
 
 ---
-#### CLASS MAIN  
+#### CLASS Main  
 A classe é usada para iniciar a aplicação. Uma instância `menu` da classe `Menu` usando a função inicia()  
   
 FUNÇÕES  
@@ -44,7 +44,7 @@ FUNÇÕES
 > Retorno: `void`  
   <hr>
 
-#### CLASS MENU
+#### CLASS Menu
 A classe é usada para gerar o menu e rodar a aplicação  
   
 FUNÇÕES  
@@ -67,10 +67,11 @@ FUNÇÕES
   > inicia()  
   O que faz: Inicia o aplicativo  
   Modificador de acesso: `public`  
-  Parâmetros: int moedaBaseId, int moedaCotacaoId  
   Retorno: `void`  
-  <hr>
-
+  <hr>  
+  
+#### CLASS CotacaoAtual
+---
 
 ### INSTALAÇÃO
 ### RODANDO PROJETO
