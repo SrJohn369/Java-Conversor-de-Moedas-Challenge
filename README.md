@@ -13,7 +13,7 @@
 </h4>  
 
 ## Índice
-- [DESCRIÇÃO](#DESCRIÇÃO)
+- [DESCRIÇÃO](#DESCRIÇÃO-:bookmark_tabs:)
 - [TECNOLOGIAS](#TECNOLOGIAS)
 - [INSTALANDO & RODANDO](#INSTALANDO-&-RODANDO)
 - [DOCUMENTAÇÃO](#DOCUMENTAÇÃO)
