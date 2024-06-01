@@ -11,18 +11,69 @@
   ![Concluído](http://img.shields.io/static/v1?label=&message=CONCLUÍDO&color=GREEN&style=for-the-badge)
   ![GitHub Tag](https://img.shields.io/github/v/tag/SrJohn369/Java-Conversor-de-Moedas-Challenge?style=for-the-badge&label=Version)
 </h4>  
+
+## Índice
+- [DESCRIÇÃO](descrição)
+- [TECNOLOGIAS](TECNOLOGIAS)
+- [INSTALANDO & RODANDO](INSTALANDO_&_RODANDO)
+- [DOCUMENTAÇÃO](DOCUMENTAÇÃO)
+  - [CLASSES E INTERFACE](CLASSES_E_INTERFACE)
+  - [CLASS Main](CLASS-Main)
+  - [Class Menu](Class-Menu)
+  - [Class CotacaoAtual](Class-CotacaoAtual)
+  - [Class ConectorExchangeRate](Class-ConectorExchangeRate)
+  - [Interface CalculoConversor](Interface-CalculoConversor)
+---
   
-#### DESCRIÇÃO
+#### DESCRIÇÃO :bookmark_tabs:
 App acessado via terminal usado para converter moedas como USD -> BRL utilizando uma API ExchangeRate-API externa para receber os valores das cotações em tempo real. Escolhendo as paridades através dos números de 1 a 6 no formato `2,5` por exemplo, é possível converter valores entre estas paridades que são "BRL", "USD", "GBP", "CNY", "CHF" e "EUR".  
 #### BREVE DEMONSTRAÇÃO
 ![C__Windows_System32_cmd exe 2024-05-27 00-22-19](https://github.com/SrJohn369/Java-Conversor-de-Moedas-Challenge/assets/106630200/d68773b8-4e1d-4462-8394-ee8cdeb8024f)  
   
 ---  
-### TECNOLOGIAS  
+### TECNOLOGIAS :hammer:
 - `Java21`
 - `InteliJ IDEA`
 - `S.O. Windows 10`  
 ---  
+### INSTALANDO & RODANDO 
+  
+Esta aplicação Java é feita com Maven(mvn).  
+Então certifique-se de ter mvn instalado na sua máquina  
+```bash
+mvn -version
+```
+  
+Certifique-se de ter esta config de plugin no seu pom.xml para executar a aplicação.
+```xml
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>3.0.0</version>
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>java</goal>
+                    </goals>
+                </execution>
+            </executions>
+            <configuration>
+                <mainClass>br.com.conversor.Main</mainClass>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
+```
+
+Com tudo ok, execute o comando abaixo
+```bash
+mvn exec:java
+```
+  
+---  
+
 ### DOCUMENTAÇÃO :books:  
 ----  
 CLASSES E INTERFACE    
@@ -33,7 +84,7 @@ CLASSES E INTERFACE
 `Interface CalculoConversor`  
 
 ---
-#### CLASS Main  
+#### CLASS Main 
 A classe é usada para iniciar a aplicação. Uma instância `menu` da classe `Menu` usando a função inicia()  
   
 FUNÇÕES  
@@ -51,7 +102,14 @@ FUNÇÕES
   > clearConsole()  
   O que faz: Limpa tela do console  
   Modificador de acesso: `private`  
-  Retorno: `void`  
+  Retorno: `void`
+  Code:
+```java
+private static void clearConsole() {
+        // Usar códigos de escape ANSI para portabilidade
+        System.out.print("\033[H\033[2J");
+    }
+```
 
   > menuInicio()  
   O que faz: Exibe o menu de inicio  
@@ -219,9 +277,13 @@ public HttpResponse<String> respostaAPI() {
     }
 
 ```
+#### Interface CalculoConversor
+Tratará de garantir que a função de calculo `converteValor(String moedaCotacao, double valorMoedaBase)` esja implementada  
+CODE:  
+```java
+public interface CalculoConversor {
+    double converteValor(String moedaCotacao, double valorMoedaBase);
+}
+```
 ---
-
-### INSTALAÇÃO
-### RODANDO PROJETO
-### FUNÇÕES
-### DEV
+### DEV :man_technologist:
