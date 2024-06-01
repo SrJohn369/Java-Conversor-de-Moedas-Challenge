@@ -71,6 +71,67 @@ FUNÇÕES
   <hr>  
   
 #### CLASS CotacaoAtual
+Classe usada para trazer as cotas e fazer o calculo de cotação por meio da impementação da interface CalculoConversor  
+
+ATRIBUTOS  
+> moedaBase: String
+
+CONSTRUTORES  
+Usado para receber um valor necessário para as consultas e calculos, a moeda base para cotação
+```java
+public CotacaoAtual(String moedaBase) {
+        this.moedaBase = moedaBase;
+    }
+```  
+FUNÇÕES
+> valorCotaContra()  
+  O que faz: Consulta dados na API ExenchangeRate-API e retorna o valor da cotação da moeda base contra a moeda de cotação  
+  Modificador de acesso: `public`  
+  Parâmetros: String moedaCotacao  
+  Retorno: `double`
+
+> mapeia()  
+  O que faz: Mapea todos os valores de um objeto JSON da consulta da moeda base feita pela classe ConectorExchangeRate usando o método respostaAPI() retornado um `Map<String, Double>`  
+  Modificador de acesso: `private`  
+  Retorno: `Map<String, Double>`
+  Parâmetros: ConectorExchangeRate conn  
+  Code:
+  ```java
+private Map<String, Double> mapeia(ConectorExchangeRate conn) {
+        // Capturar o json da request
+        String jsonString = conn.respostaAPI().body();
+        // Transformando num elemento
+        JsonElement elementoJson = JsonParser.parseString(jsonString);
+        // Transformar num obj
+        JsonObject objJson = elementoJson.getAsJsonObject();
+        // Pega o array dentro do Json
+        JsonObject conversionRates = objJson.getAsJsonObject("conversion_rates");
+
+        // Convertendo the JsonObject to a Map
+        Map<String, Double> ratesMap = new HashMap<>();
+        for (String key : conversionRates.keySet()) {
+            ratesMap.put(key, conversionRates.get(key).getAsDouble());
+        }
+
+        return ratesMap;
+    }
+  ```  
+> forteContra()  
+  O que faz: Usa a função `mapeia()` para fazer a filtragem e capturar a moeda mais forte contra a moeda base retornado um `Map<String, Double>`  
+  Modificador de acesso: `public`  
+  Retorno: `Map<String, Double>`
+  Parâmetros: String moedaBase  
+  Code:
+  ```java
+ // Forte contra
+    public Map.Entry<String, Double> forteContra(String moedaBase){
+        ConectorExchangeRate conn = new ConectorExchangeRate(moedaBase);
+
+        Map<String, Double> ratesMap = mapeia(conn);
+
+        return Collections.max(ratesMap.entrySet(), Map.Entry.comparingByValue());
+    }
+```
 ---
 
 ### INSTALAÇÃO
