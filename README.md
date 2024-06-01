@@ -74,7 +74,7 @@ FUNÇÕES
 Classe usada para trazer as cotas e fazer o calculo de cotação por meio da impementação da interface CalculoConversor  
 
 ATRIBUTOS  
-> moedaBase: String
+> private final moedaBase: String
 
 CONSTRUTORES  
 Usado para receber um valor necessário para as consultas e calculos, a moeda base para cotação
@@ -117,7 +117,7 @@ private Map<String, Double> mapeia(ConectorExchangeRate conn) {
     }
   ```  
 > forteContra()  
-  O que faz: Usa a função `mapeia()` para fazer a filtragem e capturar a moeda mais forte contra a moeda base retornado um `Map<String, Double>`  
+  O que faz: Usa a função `mapeia()` para fazer a filtragem e capturar a moeda mais FORTE contra a moeda base retornado um `Map<String, Double>`  
   Modificador de acesso: `public`  
   Retorno: `Map<String, Double>`
   Parâmetros: String moedaBase  
@@ -131,6 +131,93 @@ private Map<String, Double> mapeia(ConectorExchangeRate conn) {
 
         return Collections.max(ratesMap.entrySet(), Map.Entry.comparingByValue());
     }
+```
+> fracoContra()  
+  O que faz: Usa a função `mapeia()` para fazer a filtragem e capturar a moeda mais FRACA contra a moeda base retornado um `Map<String, Double>`  
+  Modificador de acesso: `public`  
+  Retorno: `Map<String, Double>`
+  Parâmetros: String moedaBase  
+  Code:
+  ```java
+// Fraco Contra
+    public Map.Entry<String, Double> fracoContra(String moedaBase){
+        ConectorExchangeRate conn = new ConectorExchangeRate(moedaBase);
+
+        Map<String, Double> ratesMap = mapeia(conn);
+
+        return Collections.min(ratesMap.entrySet(), Map.Entry.comparingByValue());
+    }
+
+```
+> converteValor()  
+  O que faz: Conteverte o valor fornecido de cotação multiplicando pela moeda base e retornado um `double`  
+  Modificador de acesso: `public`  
+  Retorno: `double`
+  Parâmetros: String moedaCotacao, double valorMoedaBase  
+  Code:
+  ```java
+ @Override
+    public double converteValor(String moedaCotacao, double valorMoedaBase) {
+        double cotacao = valorCotaContra(moedaCotacao);
+
+        return cotacao * valorMoedaBase;
+    }
+```
+#### CLASS ConectorExchangeRate   
+Esta classe irá tratar das requisições e conexão com a API  
+ATRIBUTOS  
+> private final key: String  
+> private code: String  
+> private uri: String
+  
+CONSTRUTORES  
+Todos os construtores irão crirar uma URI dinânmica  
+`ConectorExchangeRate()`  
+Este contrutor irá criar uma uri automatica de conexão que irá capturar todos os códigos disponíveis da API  
+```java
+    public ConectorExchangeRate() {
+        this.uri = "https://v6.exchangerate-api.com/v6/" + key + "/latest/" + code;
+    }
+```  
+`ConectorExchangeRate(String code)`  
+Este contrutor irá criar uma uri automatica de conexão que irá capturar totodos dados de uma moeda  
+```java
+public ConectorExchangeRate(String code) {
+        this.uri = "https://v6.exchangerate-api.com/v6/" + key + "/latest/" + code;
+    }
+```
+`ConectorExchangeRate(String code1, String code2)`  
+Este contrutor irá criar uma uri automatica de conexão que irá capturar dados de uma moeda contra outra moeda, uma moeda base e uma moeda de cotação ex: USD/BRL  
+```java
+public ConectorExchangeRate(String code1, String code2){
+        this.uri = "https://v6.exchangerate-api.com/v6/" + key + "/pair/" + code1 + "/" + code2;
+    }
+```
+
+FUNÇÕES
+> respostaAPI()  
+  O que faz: Faz a conexão com a API e retorna uma resposta JSON em STR   
+  Modificador de acesso: `public`  
+  Retorno: `HttpResponse<String>`  
+  Code:
+```java
+public HttpResponse<String> respostaAPI() {
+        // Cria um cliente HTTP
+        HttpClient client = HttpClient.newHttpClient();
+        // Fazer requisição GET
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(this.uri))
+                .GET()
+                .build();
+        try {
+            // capturando resposta
+            return client.send(request, BodyHandlers.ofString());
+        } catch (Exception err) {
+            System.out.println("Houve um erro na requisição: " + err);
+            return null;
+        }
+    }
+
 ```
 ---
 
