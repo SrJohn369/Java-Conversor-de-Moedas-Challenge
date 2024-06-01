@@ -32,7 +32,7 @@ public class CotacaoAtual implements CalculoConversor {
         return objJson.get("conversion_rate").getAsDouble();
     }
 
-    public Map<String, Double> mapeia(ConectorExchangeRate conn) {
+    private Map<String, Double> mapeia(ConectorExchangeRate conn) {
         // Capturar o json da request
         String jsonString = conn.respostaAPI().body();
         // Transformando num elemento

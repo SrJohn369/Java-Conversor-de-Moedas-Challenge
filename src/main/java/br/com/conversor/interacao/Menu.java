@@ -9,16 +9,21 @@ public final class Menu {
     // inicar variáveis
     Scanner leia = new Scanner(System.in);
 
+    private static void clearConsole() {
+        // Use ANSI escape codes for portability
+        System.out.print("\033[H\033[2J");
+    }
+
     private void menuInicio(){
         System.out.println("""
                     ==================CONVERSOR DE MOEDAS================
                     |                                                   |
-                    | ESCOLHA A MOEDA BASE E A MOEDA DE COTAÇÃO         |
-                    | (Neste formato 2,1 -- essa escolha é USD/BRL)     |
+                    | ESCOLHA A MOEDA BASE E A MOEDA DE COTACAO         |
+                    | (Neste formato 2,1 -->  USD/BRL)                  |
                     |                                                   |
-                    | 1.BRL(Real Brasileiro)    2.USD(Dólar Americano)  |
+                    | 1.BRL(Real Brasileiro)    2.USD(Dolar Americano)  |
                     | 3.GBP(Libra Esterlina)    4.CNY(Yuan Renminbi)    |
-                    | 5.CHF(Franco suiço)       6.EUR(Euro)             |
+                    | 5.CHF(Franco suico)       6.EUR(Euro)             |
                     | 99. Encerrar programa                             |
                     |                                                   |
                     =====================================================""");
@@ -27,7 +32,7 @@ public final class Menu {
     private void menuConversor(int moedaBaseId, int moedaCotacaoId) {
         // Vetor de identificação
         String[] paridadesCodes = {"BRL", "USD", "GBP", "CNY", "CHF", "EUR"};
-        String[] paridadesNomes = {"Real", "Dólar", "Libra", "Yuan", "Franco", "Euro"};
+        String[] paridadesNomes = {"Real", "Dolar", "Libra", "Yuan", "Franco", "Euro"};
 
         // processando dados
         System.out.println("Processando....");
@@ -67,6 +72,8 @@ public final class Menu {
         double paraConveter = leia.nextDouble();
         System.out.println("===========\nProcessando....");
 
+        clearConsole();
+
         System.out.printf("""
                 ==================CONVERSOR DE MOEDAS================
                 |               RESULTADO DA CONVERSÃO
@@ -85,6 +92,7 @@ public final class Menu {
         while (true) {
             try {
                 // Escolhas
+                clearConsole();
                 menuInicio();
                 System.out.print("Escolha: ");
                 double escolha = leia.nextDouble();
@@ -102,24 +110,31 @@ public final class Menu {
                 switch (moedaBase) {
                     // BRL BASE
                     case 0:
+                        clearConsole();
                         menuConversor(moedaBase, moedaCotacao);
                         break;
                     case 1:
+                        clearConsole();
                         menuConversor(moedaBase, moedaCotacao);
                         break;
                     case 2:
+                        clearConsole();
                         menuConversor(moedaBase, moedaCotacao);
                         break;
                     case 3:
+                        clearConsole();
                         menuConversor(moedaBase, moedaCotacao);
                         break;
                     case 4:
+                        clearConsole();
                         menuConversor(moedaBase, moedaCotacao);
                         break;
                     case 5:
+                        clearConsole();
                         menuConversor(moedaBase, moedaCotacao);
                         break;
                     default:
+                        clearConsole();
                         System.out.println("VALOR INVÁLIDO - TENTE NOVAMENTE");
                         break;
                 }
