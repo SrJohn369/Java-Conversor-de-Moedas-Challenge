@@ -285,4 +285,6 @@ public interface CalculoConversor {
 }
 ```
 ---
-### DEV :man_technologist:
+### DESENVOLVEDOR
+| [<img loading="lazy" src="https://avatars.githubusercontent.com/u/106630200?v=4" width=115><br><sub>João Victor</sub>](https://github.com/SrJohn369) |  
+| :---: |
