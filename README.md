@@ -13,11 +13,10 @@
 </h4>  
 
 ## Índice
-- [DESCRIÇÃO](#DESCRIÇÃO--:bookmark_tabs:)
+- [DESCRIÇÃO](#DESCRIÇÃO)
 - [TECNOLOGIAS](#TECNOLOGIAS)
-- [INSTALANDO & RODANDO](#INSTALANDO-&-RODANDO)
+- [INSTALANDO & RODANDO](#INSTALANDO--RODANDO)
 - [DOCUMENTAÇÃO](#DOCUMENTAÇÃO)
-  - [CLASSES E INTERFACE](#CLASSES-E-INTERFACE)
   - [CLASS Main](#CLASS-Main)
   - [Class Menu](#Class-Menu)
   - [Class CotacaoAtual](#Class-CotacaoAtual)
@@ -25,13 +24,13 @@
   - [Interface CalculoConversor](#Interface-CalculoConversor)
 ---
   
-#### DESCRIÇÃO :bookmark_tabs:
+#### DESCRIÇÃO
 App acessado via terminal usado para converter moedas como USD -> BRL utilizando uma API ExchangeRate-API externa para receber os valores das cotações em tempo real. Escolhendo as paridades através dos números de 1 a 6 no formato `2,5` por exemplo, é possível converter valores entre estas paridades que são "BRL", "USD", "GBP", "CNY", "CHF" e "EUR".  
 #### BREVE DEMONSTRAÇÃO
 ![C__Windows_System32_cmd exe 2024-05-27 00-22-19](https://github.com/SrJohn369/Java-Conversor-de-Moedas-Challenge/assets/106630200/d68773b8-4e1d-4462-8394-ee8cdeb8024f)  
   
 ---  
-### TECNOLOGIAS :hammer:
+### TECNOLOGIAS
 - `Java21`
 - `InteliJ IDEA`
 - `S.O. Windows 10`  
@@ -74,7 +73,7 @@ mvn exec:java
   
 ---  
 
-### DOCUMENTAÇÃO :books:  
+### DOCUMENTAÇÃO
 ----  
 CLASSES E INTERFACE    
 `Class Main`  
